@@ -30,8 +30,7 @@ app.use('/static', express.static('dist/static', {index: false}));
 
 ROUTES.forEach(route => {
   app.get(route, (req, res) => {
-    console.log('-------------', req.originalUrl)
-    console.time(`GET: ${req.originalUrl}`);
+
     if (/.html$/.test(req.originalUrl)) {
       app.render('../dist/index', {
         req: req,
