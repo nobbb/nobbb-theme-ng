@@ -18,31 +18,36 @@ const port = 8000;
 const baseUrl = `http://localhost:${port}`;
 import glob from 'glob';
 
-app.engine('html', ngExpressEngine({
-  bootstrap: ServerAppModule
-}));
+app.engine(
+  'html',
+  ngExpressEngine({
+    bootstrap: ServerAppModule
+  })
+);
 
 app.set('view engine', 'html');
 app.set('views', 'src');
 
-app.use('/', express.static('dist', {index: false}));
-app.use('/static', express.static('dist/static', {index: false}));
+app.use('/', express.static('dist', { index: false }));
+app.use('/static', express.static('dist/', { index: false }));
 
 ROUTES.forEach(route => {
   app.get(route, (req, res) => {
-
     if (/.html$/.test(req.originalUrl)) {
-      app.render('../dist/index', {
-        req: req,
-        res: res
-      }, function(err, html) {
-        console.log(colors.green(html));
-
-        fs.writeFileSync(path.join(
-          '/Users/chchen/MY-PROJECT/nobbb/build',
-          req.originalUrl
-        ), html)
-      });
+      app.render(
+        '../dist/index',
+        {
+          req: req,
+          res: res
+        },
+        function(err, html) {
+          console.log(colors.green(html));
+          fs.writeFileSync(
+            path.join('/Users/chchen/MY-PROJECT/nobbb/build', req.originalUrl),
+            html
+          );
+        }
+      );
     }
     res.render('../dist/index', {
       req: req,
@@ -52,29 +57,22 @@ ROUTES.forEach(route => {
   });
 });
 
-
-app.get('/data', (req, res) => {
-  console.time(`GET: ${req.originalUrl}`);
-  res.json(api.getData());
-  console.timeEnd(`GET: ${req.originalUrl}`);
-});
-
-app.listen(8000,() => {
+app.listen(8000, () => {
   console.log(`Listening at ${baseUrl}`);
   const buildedPath = '/Users/chchen/MY-PROJECT/nobbb/build';
-  glob('/Users/chchen/MY-PROJECT/nobbb/build/**/*.html', function (err, files) {
+  glob('/Users/chchen/MY-PROJECT/nobbb/build/**/*.html', function(err, files) {
     files.forEach(file => {
       const url = file.split(buildedPath)[1];
-      app.render('../dist/index', {
-        req: {originalUrl: url},
-        res: {}
-      }, function(err, html) {
-        fs.writeFileSync(path.join(
-          buildedPath,
-          url
-        ), html)
-      });
+      app.render(
+        '../dist/index',
+        {
+          req: { originalUrl: url },
+          res: {}
+        },
+        function(err, html) {
+          fs.writeFileSync(path.join(buildedPath, url), html);
+        }
+      );
     });
-  })
-
+  });
 });
