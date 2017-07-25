@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TransferState} from '../modules/transfer-state/transfer-state';
+// import { TransferState} from '../modules/transfer-state/transfer-state';
 
 @Component({
   selector: 'demo-app',
@@ -8,8 +8,6 @@ import { TransferState} from '../modules/transfer-state/transfer-state';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
-  constructor(private cache: TransferState) {}
-  ngOnInit() {
-    this.cache.set('cached', true);
-  }
+  constructor() {}
+  ngOnInit() {}
 }

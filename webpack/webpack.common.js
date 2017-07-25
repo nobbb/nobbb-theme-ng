@@ -8,6 +8,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
+
   output: {
     path: root('dist'),
     publicPath: '/static'

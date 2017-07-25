@@ -10,7 +10,10 @@ const ScriptExtPlugin = require('script-ext-html-webpack-plugin');
  * This is a client config which should be merged on top of common config
  */
 module.exports = {
-  entry: root('./src/main.browser.ts'),
+  entry: root('./src/main.ts'),
+  devServer: {
+    port: 9000
+  },
   output: {
     filename: 'client.js'
   },

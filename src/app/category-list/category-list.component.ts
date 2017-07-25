@@ -17,11 +17,8 @@ export class CategoryListComponent implements OnInit {
   categorys = [];
 
   ngOnInit(): void {
-    this.http
-      .get(API_ENDPOINT + '/categorys/index.json')
-      .toPromise()
-      .then(response => {
-        this.categorys = response.json();
-      });
+    this.http.get(API_ENDPOINT + '/categorys/index.json').toPromise().then(response => {
+      this.categorys = response.json();
+    });
   }
 }

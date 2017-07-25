@@ -1,9 +1,10 @@
-const { resolve } = require('path');
+var path = require('path');
 
-function root(path) {
-  return resolve(__dirname, '..', path);
+var _root = path.resolve(__dirname, '..');
+
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [_root].concat(args));
 }
 
-module.exports = {
-  root: root
-};
+exports.root = root;
