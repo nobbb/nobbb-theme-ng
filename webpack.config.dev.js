@@ -12,14 +12,13 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     port: 9000,
-    historyApiFallback: true,
-    stats: 'minimal'
+    historyApiFallback: true
   },
   resolve: {
     extensions: ['.ts', '.js']
   },
   output: {
-    path: helpers.root('dist'),
+    path: helpers.root('dist/static'),
     publicPath: '/',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
@@ -30,11 +29,9 @@ module.exports = {
         test: /\.ts$/,
         loaders: [
           {
-            loader: '@ngtools/webpack',
-            options: {
-              tsConfigPath: './src/tsconfig.app.json'
-            }
-          }
+            loader: 'awesome-typescript-loader',
+            options: { configFileName: helpers.root('src', 'tsconfig.json') }
+          },  'angular2-template-loader'
         ]
       },
       {
@@ -48,10 +45,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?sourceMap'
-        })
+        loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
       },
       {
         test: /\.css$/,
@@ -60,25 +54,13 @@ module.exports = {
       }
     ]
   },
-
   plugins: [
-    new webpack.ContextReplacementPlugin(
-      // The (\\|\/) piece accounts for path separators in *nix and Windows
-        /angular(\\|\/)core(\\|\/)@angular/,
-      helpers.root('./src'), // location of your src
-      {} // a map of your routes
-    ),
-
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
-
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new ExtractTextPlugin('[name].css'),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
+    new ExtractTextPlugin('[name].css')
   ]
 };

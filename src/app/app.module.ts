@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { NgModule, ApplicationRef } from '@angular/core';
 import { HttpModule } from '@angular/http';
-// import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-// import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app.routing.modules';
