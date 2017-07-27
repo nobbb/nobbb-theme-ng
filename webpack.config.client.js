@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./webpack/helpers');
+const { AotPlugin } = require('@ngtools/webpack');
 
 module.exports = {
   entry: {
@@ -10,10 +11,6 @@ module.exports = {
     app: './src/main.ts'
   },
   devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    port: 9000,
-    historyApiFallback: true
-  },
   resolve: {
     extensions: ['.ts', '.js']
   },
@@ -25,15 +22,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.ts$/,
-        loaders: [
-          {
-            loader: 'awesome-typescript-loader',
-            options: { configFileName: helpers.root('src', 'tsconfig.json') }
-          },  'angular2-template-loader'
-        ]
-      },
+      { test: /\.ts$/, loader: '@ngtools/webpack' },
       {
         test: /\.html$/,
         loader: 'html-loader'
@@ -61,6 +50,10 @@ module.exports = {
       helpers.root('./src'), // location of your src
       {} // a map of your routes
     ),
+    new AotPlugin({
+      tsConfigPath: helpers.root('src', 'tsconfig.json'),
+      skipCodeGeneration: false
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'polyfills']
     }),
