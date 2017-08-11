@@ -3,10 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryComponent } from './category/category.component';
 import { ArticleComponent } from './article/article.component';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', loadChildren: '+home/home.module#HomeModule' },
   { path: 'categorys', component: CategoryListComponent },
   { path: ':categoryName', component: CategoryComponent },
   {

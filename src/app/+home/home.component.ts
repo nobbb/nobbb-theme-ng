@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FangweiComponent } from '../fangwei/fangwei.component';
 
 @Component({
   selector: 'app-home',

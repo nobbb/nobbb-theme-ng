@@ -36,6 +36,7 @@
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.2.1",
     "colors": "^1.1.2",
+    "es6-promise-loader": "^1.0.2",
     "express": "^4.15.2",
     "glob": "^7.1.2",
     "gulp": "^3.9.1",

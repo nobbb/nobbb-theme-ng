@@ -9,16 +9,9 @@ import { AppRoutingModule } from './app.routing.modules';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryComponent } from './category/category.component';
 import { ArticleComponent } from './article/article.component';
-import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CategoryListComponent,
-    CategoryComponent,
-    ArticleComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, CategoryListComponent, CategoryComponent, ArticleComponent],
   imports: [BrowserModule, HttpModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

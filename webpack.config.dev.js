@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: helpers.root('dist/'),
-    publicPath: '/static',
+    // publicPath: '/static',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
   },
